@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckMenuItem?>
+<?import javafx.scene.control.ContextMenu?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="miksa.musicplayer.controllers.PrimaryController">
+   <top>
+      <MenuBar BorderPane.alignment="CENTER">
+        <menus>
+          <Menu mnemonicParsing="false" text="Soubor">
+            <items>
+                  <MenuItem mnemonicParsing="false" onAction="#openFileClick" text="Otevrit soubor" />
+                  <MenuItem fx:id="miOpenFolder" mnemonicParsing="false" onAction="#miOpenFolderClick" text="Otevřít složku" />
+                  <MenuItem fx:id="miOpenSettings" mnemonicParsing="false" onAction="#miOpenSettigns_Click" text="Nastavení" />
+              <MenuItem mnemonicParsing="false" onAction="#miClose_Click" text="Konec" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Přehrávač">
+            <items>
+              <MenuItem fx:id="miPlay" mnemonicParsing="false" onAction="#btnStartClick" text="Přehrát" />
+                  <MenuItem fx:id="miPause" mnemonicParsing="false" onAction="#btnStartClick" text="Pauza" />
+                  <MenuItem fx:id="miStop" mnemonicParsing="false" onAction="#btnStopClick" text="Zastavit" />
+                  <MenuItem fx:id="miPrev" mnemonicParsing="false" onAction="#btnPrevClick" text="Předchozí" />
+                  <MenuItem fx:id="miNext" mnemonicParsing="false" onAction="#btnNextClick" text="Následující" />
+                  <Menu mnemonicParsing="false" text="Režim přehrávání">
+                     <items>
+                        <CheckMenuItem fx:id="cmiNormal" mnemonicParsing="false" onAction="#miSetPlaybackModeNormalClick" text="Normální" />
+                        <CheckMenuItem fx:id="cmiRepeatOne" mnemonicParsing="false" onAction="#miSetPlaybackModeRepeatOneClick" text="Opakovat jednu skladbu" />
+                        <CheckMenuItem fx:id="cmiRepeatAll" mnemonicParsing="false" onAction="#miSetPlaybackModeRepeatAllClick" text="Opakovat všechny skladby" />
+                        <CheckMenuItem fx:id="cmiShuffle" mnemonicParsing="false" onAction="#miSetPlaybackModeShuffleClick" text="Náhodně" />
+                     </items>
+                  </Menu>
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Nápověda">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#miAbout_Click" text="O aplikaci" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+   </top>
+   <bottom>
+      <VBox prefHeight="80.0" prefWidth="600.0" styleClass="bottombar" BorderPane.alignment="CENTER">
+         <children>
+            <Slider fx:id="sliderProgress" onMousePressed="#seekStart" onMouseReleased="#seekStop" styleClass="my-slider">
+               <VBox.margin>
+                  <Insets left="15.0" right="15.0" top="3.0" />
+               </VBox.margin>
+            </Slider>
+            <HBox prefHeight="68.0" prefWidth="600.0">
+               <children>
+                  <HBox />
+                  <Button fx:id="btnStart" mnemonicParsing="false" onAction="#btnStartClick" prefHeight="50.0" prefWidth="50.0">
+                     <graphic>
+                        <ImageView fx:id="btnPlayPauseImage" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" style="-fx-border-radius: 25px;">
+                           <image>
+                              <Image url="@controllers/icons/play.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <HBox.margin>
+                        <Insets left="7.0" right="7.0" top="7.0" />
+                     </HBox.margin>
+                     <styleClass>
+                        <String fx:value="playbutton" />
+                        <String fx:value="control-button-color" />
+                     </styleClass></Button>
+                  <Button fx:id="btnStop" mnemonicParsing="false" onAction="#btnStopClick" prefHeight="36.0" prefWidth="36.0">
+                     <graphic>
+                        <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@controllers/icons/stop.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <HBox.margin>
+                        <Insets right="5.0" top="15.0" />
+                     </HBox.margin>
+                     <styleClass>
+                        <String fx:value="other-button" />
+                        <String fx:value="control-button-color" />
+                     </styleClass></Button>
+                  <Button fx:id="btnPrev" mnemonicParsing="false" onAction="#btnPrevClick" prefHeight="36.0" prefWidth="36.0">
+                     <graphic>
+                        <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@controllers/icons/prev.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <HBox.margin>
+                        <Insets right="5.0" top="15.0" />
+                     </HBox.margin>
+                     <styleClass>
+                        <String fx:value="other-button" />
+                        <String fx:value="control-button-color" />
+                     </styleClass></Button>
+                  <Button fx:id="btnNext" mnemonicParsing="false" onAction="#btnNextClick" prefHeight="36.0" prefWidth="36.0">
+                     <graphic>
+                        <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@controllers/icons/next.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <HBox.margin>
+                        <Insets top="15.0" />
+                     </HBox.margin>
+                     <styleClass>
+                        <String fx:value="other-button" />
+                        <String fx:value="control-button-color" />
+                     </styleClass></Button>
+                  <Slider fx:id="sliderVolume" majorTickUnit="1.0" max="10.0" minorTickCount="0" styleClass="my-slider" value="5.0">
+                     <HBox.margin>
+                        <Insets left="5.0" top="27.0" />
+                     </HBox.margin></Slider>
+                  <Label fx:id="lbNowPlayActualTime" text="--:--" textFill="WHITE">
+                     <HBox.margin>
+                        <Insets left="5.0" top="25.0" />
+                     </HBox.margin></Label>
+                  <Label text="/" textFill="WHITE">
+                     <HBox.margin>
+                        <Insets top="25.0" />
+                     </HBox.margin></Label>
+                  <Label fx:id="lbNowPlayDuration" text="--:--" textFill="WHITE">
+                     <HBox.margin>
+                        <Insets top="25.0" />
+                     </HBox.margin></Label>
+               </children>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </HBox>
+         </children>
+      </VBox>
+   </bottom>
+   <center>
+      <TabPane prefHeight="311.0" prefWidth="621.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+        <tabs>
+          <Tab closable="false" text="Fronta">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView fx:id="tvQueue" prefHeight="313.0" prefWidth="501.0" AnchorPane.bottomAnchor="35.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <columns>
+                              <TableColumn fx:id="tcQueueTrackNum" editable="false" prefWidth="75.0" sortable="false" text="Číslo skladby" />
+                              <TableColumn fx:id="tcQueueDiscNum" editable="false" prefWidth="75.0" sortable="false" text="Číslo disku" />
+                              <TableColumn fx:id="tcQueueName" editable="false" prefWidth="75.0" sortable="false" text="Název" />
+                              <TableColumn fx:id="tcQueueArtist" editable="false" prefWidth="75.0" sortable="false" text="Interpret" />
+                              <TableColumn fx:id="tcQueueAlbum" editable="false" prefWidth="75.0" sortable="false" text="Album" />
+                              <TableColumn fx:id="tcQueueYear" editable="false" prefWidth="75.0" sortable="false" text="Rok" />
+                              <TableColumn fx:id="tcQueueDuration" editable="false" prefWidth="75.0" sortable="false" text="Délka" />
+                              <TableColumn fx:id="tcQueueFormat" editable="false" prefWidth="75.0" sortable="false" text="Formát" />
+                              <TableColumn fx:id="tcQueueSource" editable="false" prefWidth="75.0" sortable="false" text="Zdroj" />
+                              <TableColumn fx:id="tcQueuePath" editable="false" prefWidth="75.0" sortable="false" text="Cesta k souboru" />
+                           </columns>
+                           <contextMenu>
+                              <ContextMenu>
+                                <items>
+                                    <MenuItem fx:id="cmQueuePlay" mnemonicParsing="false" onAction="#cmQueuePlay_Click" text="Přehrát" />
+                                  <MenuItem fx:id="cmQueueRemoveSelected" mnemonicParsing="false" onAction="#cmQueueRemoveSelected_Click" text="Odstranit z fronty" />
+                                </items>
+                              </ContextMenu>
+                           </contextMenu>
+                        </TableView>
+                        <HBox layoutX="8.0" layoutY="243.0" maxHeight="40.0" prefHeight="35.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                           <children>
+                              <Button fx:id="btnAddFile" mnemonicParsing="false" onAction="#openFileClick" text="Přidat soubor" />
+                              <Button fx:id="btnAddFolder" mnemonicParsing="false" onAction="#miOpenFolderClick" text="Přidat složku">
+                                 <HBox.margin>
+                                    <Insets left="5.0" />
+                                 </HBox.margin>
+                              </Button>
+                              <Button fx:id="btnRemoveAll" mnemonicParsing="false" onAction="#btnRemoveAllClick" text="Odstranit vše">
+                                 <HBox.margin>
+                                    <Insets left="5.0" />
+                                 </HBox.margin>
+                              </Button>
+                           </children>
+                           <padding>
+                              <Insets left="5.0" top="5.0" />
+                           </padding>
+                        </HBox>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab closable="false" text="Knihovna">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <HBox fx:id="tbtnArists" layoutY="8.0" maxHeight="40.0" minHeight="40.0" prefHeight="40.0" AnchorPane.leftAnchor="6.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <VBox prefHeight="40.0">
+                                 <children>
+                                    <RadioButton fx:id="rbLibraryUser" mnemonicParsing="false" prefHeight="20.0" selected="true" text="Knihovna uživatele">
+                                       <toggleGroup>
+                                          <ToggleGroup fx:id="libraryModeRB" />
+                                       </toggleGroup>
+                                    </RadioButton>
+                                    <RadioButton fx:id="rbLibrarySearch" mnemonicParsing="false" prefHeight="20.0" text="Hledání" toggleGroup="$libraryModeRB" />
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets left="5.0" right="5.0" />
+                                 </HBox.margin>
+                              </VBox>
+                              <ToggleButton fx:id="tbtnLibraryModeArtists" mnemonicParsing="false" onAction="#libraryModeChange" selected="true" text="Interpreti">
+                                 <toggleGroup>
+                                    <ToggleGroup fx:id="libraryMode" />
+                                 </toggleGroup>
+                                 <HBox.margin>
+                                    <Insets top="7.0" />
+                                 </HBox.margin>
+                              </ToggleButton>
+                              <ToggleButton fx:id="tbtnLibraryModeAlbums" mnemonicParsing="false" onAction="#libraryModeChange" text="Alba" toggleGroup="$libraryMode">
+                                 <HBox.margin>
+                                    <Insets top="7.0" />
+                                 </HBox.margin></ToggleButton>
+                              <ToggleButton fx:id="tbtnLibraryModeTracks" mnemonicParsing="false" onAction="#libraryModeChange" text="Skladby" toggleGroup="$libraryMode">
+                                 <HBox.margin>
+                                    <Insets top="7.0" />
+                                 </HBox.margin></ToggleButton>
+                              <HBox fx:id="hbSearch" prefHeight="100.0" prefWidth="400.0">
+                                 <children>
+                                    <TextField fx:id="tfSearch" promptText="Text...">
+                                       <HBox.margin>
+                                          <Insets right="5.0" top="7.0" />
+                                       </HBox.margin>
+                                    </TextField>
+                                    <Button fx:id="btnSearch" mnemonicParsing="false" onAction="#btnSearch_Click" text="Hledat">
+                                       <HBox.margin>
+                                          <Insets top="7.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets left="20.0" />
+                                 </HBox.margin>
+                              </HBox>
+                           </children>
+                        </HBox>
+                        <HBox layoutX="961.0" layoutY="11.0" prefHeight="25.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="10.0">
+                           <children>
+                              <Button mnemonicParsing="false" onAction="#btnPlayAll_Click" text="Přehrát vše" />
+                              <Button fx:id="btnAddAllToQueue" mnemonicParsing="false" onAction="#btnAddAllToQueue_Click" text="Přidat vše do fronty">
+                                 <HBox.margin>
+                                    <Insets left="5.0" />
+                                 </HBox.margin>
+                              </Button>
+                           </children>
+                        </HBox>
+                        <AnchorPane layoutX="14.0" layoutY="39.0" prefHeight="590.0" prefWidth="1147.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="40.0">
+                           <children>
+                              <TableView fx:id="tvLibraryTracks" layoutX="413.0" layoutY="5.0" prefHeight="589.0" prefWidth="545.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="610.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <columns>
+                                    <TableColumn fx:id="tcLibArtist" prefWidth="150.0" text="Interpret" />
+                                    <TableColumn fx:id="tcLibAlbum" prefWidth="150.0" text="Album" />
+                                    <TableColumn fx:id="tcLibTrackNum" prefWidth="65.0" text="Číslo skladby" />
+                                    <TableColumn fx:id="tcLibDiscNum" prefWidth="65.0" text="Číslo disku" />
+                                    <TableColumn fx:id="tcLibTitle" prefWidth="150.0" text="Název" />
+                                    <TableColumn fx:id="tcLibYear" prefWidth="45.0" text="Rok" />
+                                    <TableColumn fx:id="tcLibDuration" prefWidth="75.0" text="Délka" />
+                                    <TableColumn fx:id="tcLibFormat" prefWidth="75.0" text="Formát" />
+                                    <TableColumn fx:id="tcLibPath" prefWidth="75.0" text="Cesta k souboru" />
+                                 </columns>
+                                 <contextMenu>
+                                    <ContextMenu>
+                                       <items>
+                                          <MenuItem fx:id="cmLibAddToQueue" mnemonicParsing="false" onAction="#cmLibAddToQueue_Click" text="Přidat do fronty" />
+                                          <MenuItem fx:id="cmLibPlay" mnemonicParsing="false" onAction="#cmLibPlay_Click" text="Přehrát" />
+                                       </items>
+                                    </ContextMenu>
+                                 </contextMenu>
+                              </TableView>
+                              <ListView fx:id="lvLibraryArtists" layoutX="11.0" layoutY="340.0" prefHeight="239.0" prefWidth="300.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                              <ListView fx:id="lvLibraryAlbums" layoutX="306.0" prefHeight="240.0" prefWidth="300.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="305.0" AnchorPane.topAnchor="0.0" />
+                           </children>
+                        </AnchorPane>
+                     </children></AnchorPane>
+            </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+   </center>
+   <right>
+      <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <VBox maxWidth="200.0" minWidth="200.0" prefHeight="200.0" prefWidth="200.0" styleClass="side-bar">
+               <children>
+                  <Label alignment="CENTER" prefHeight="19.0" prefWidth="200.0" text="Nyní se přehrává" textAlignment="CENTER" textFill="WHITE">
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                  </Label>
+                  <ImageView fx:id="ivSidebarArt" fitHeight="170.0" fitWidth="170.0" pickOnBounds="true" preserveRatio="true">
+                     <VBox.margin>
+                        <Insets top="5.0" />
+                     </VBox.margin>
+                  </ImageView>
+                  <Label fx:id="lbSidebarTitle" alignment="CENTER" prefWidth="170.0" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lbSidebarArtist" alignment="CENTER" prefWidth="170.0" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="2.0" top="2.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Label fx:id="lbSidebarAlbum" alignment="CENTER" prefWidth="170.0" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="2.0" top="2.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Label fx:id="lbSidebarFormatSource" alignment="CENTER" prefHeight="17.0" prefWidth="170.0" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+               <padding>
+                  <Insets left="15.0" right="15.0" />
+               </padding>
+            </VBox>
+         </children>
+      </HBox>
+   </right>
+</BorderPane>

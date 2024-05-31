@@ -1,0 +1,59 @@
+/* colors */
+.control-button-color {
+	-fx-background-color: linear-gradient(#4f61c3 0%,#172aaa 50%, #9fe6fc 100%);
+}
+
+/* bottom bar */
+.bottombar {
+	/* 									  top 		 bottom */
+	-fx-background-color: linear-gradient(#b3b3b3 0%,#1a1a1a 60%)	
+}
+
+.playbutton {
+	-fx-border-width: 2px;
+	-fx-border-color: #141a32;
+	-fx-border-radius: 25px;
+	-fx-background-radius: 25px;
+}
+.playbutton:hover {
+	
+}
+
+.other-button {
+	-fx-border-width: 2px;
+	-fx-border-color: #141a32;
+	-fx-border-radius: 18px;
+	-fx-background-radius: 18px;
+}
+/* sliders */
+.my-slider .thumb {
+	-fx-background-color: linear-gradient(#4f61c3 0%,#172aaa 50%, #9fe6fc 100%);
+}
+
+/* menubar */
+.menu-bar {
+	-fx-background-color: linear-gradient(to bottom, #b3b3b3 0%,#1a1a1a 60%);
+	
+}
+
+.menu-bar .label {
+	-fx-text-fill: white;
+}
+
+.menu-item {
+	-fx-background-color: black;
+}
+.menu-item .label {
+    -fx-font-size: 11.0 px;
+    -fx-text-fill: white;
+    -fx-padding: 0px;
+}
+
+/* sidebar */
+.side-bar {
+	-fx-background-color: linear-gradient(to right, #b3b3b3 0%,#1a1a1a 40%)
+}
+
+.text-color {
+	-fx-font-color: white;
+}
